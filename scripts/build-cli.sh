@@ -17,6 +17,12 @@ env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w -X main.CliVersion=$VERSION
 echo "Building for Darwin 64-bit"
 env GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w -X main.CliVersion=$VERSION" -o /dist/ngssc_darwin_64bit
 
+echo "Building for ARM 32-bit"
+env GOOS=linux GOARCH=arm GOARM=6 go build -ldflags="-s -w -X main.CliVersion=$VERSION" -o /dist/ngssc_arm_32bit
+
+echo "Building for ARM 64-bit"
+env GOOS=linux GOARCH=arm64 go build -ldflags="-s -w -X main.CliVersion=$VERSION" -o /dist/ngssc_arm_64bit
+
 if [[ -z "$BUILD_UPX" ]]; then
     exit 0
 fi
@@ -40,3 +46,11 @@ upx --brute /dist/ngssc_64bit_min
 echo "Minify Darwin 64 binary"
 cp /dist/ngssc_darwin_64bit /dist/ngssc_darwin_64bit_min
 upx --brute /dist/ngssc_darwin_64bit_min
+
+echo "Minify Linux ARM 32 binary"
+cp /dist/ngssc_arm_32bit /dist/ngssc_arm_32bit_min
+upx --brute /dist/ngssc_arm_32bit_min
+
+echo "Minify Linux ARM 64 binary"
+cp /dist/ngssc_arm_64bit /dist/ngssc_arm_64bit_min
+upx --brute /dist/ngssc_arm_64bit_min
