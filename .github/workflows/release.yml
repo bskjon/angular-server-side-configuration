@@ -73,7 +73,8 @@ jobs:
           fi
         env:
           REF: ${{ github.ref }}
-      - name: 'Publish: angular-server-side-configuration'
-        run: yarn publish dist/angular-server-side-configuration --tag ${{ steps.npm_tag.outputs.npm_tag }}
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+# Disable this as i only want the ngssc in ARM
+#      - name: 'Publish: angular-server-side-configuration'
+#        run: yarn publish dist/angular-server-side-configuration --tag ${{ steps.npm_tag.outputs.npm_tag }}
+#        env:
+#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
